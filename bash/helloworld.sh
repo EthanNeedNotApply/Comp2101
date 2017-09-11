@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "hello user"
+echo "hello world"
+#said hello to the world
