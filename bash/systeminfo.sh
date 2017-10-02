@@ -7,7 +7,14 @@ function displayhelp {
   cat <<EOF
   Usage: $0 [-h | --help] [output options]
   Command options can be one or more of the following
-
+  -n | --nameinfo =
+  -i | --ipinfo =
+  -o | --osinfo =
+  -c | --cpuinfo =
+  -m | --meminfo =
+  -d | --diskinfo =
+  -p | --printinfo =
+  -s | --softinfo = 
 EOF
 }
 
@@ -20,6 +27,8 @@ function errormessage {
 #Display the output.
 #Do any cleanup of temporary files if needed.
 
+rundefault="yes"
+
 while [ $# -gt 0 ]; do
     case "$1" in
       -h|--help)
@@ -27,16 +36,39 @@ while [ $# -gt 0 ]; do
         exit 0
         ;;
         #list of options var after this line
-      -n|--nameinfo
+      -n|--nameinfo)
           nameinfowanted="yes"
+          rundefault="no"
           ;;
-
+      -i|--ipinfo)
+          ipinfowanted="yes"
+          rundefault="no"
+          ;;
       -o|--osinfo)
           osinfowanted="yes"
+          rundefault="no"
           ;;
-
+      -c|--cpuinfo)
+          cpuinfowanted="yes"
+          rundefault="no"
+          ;;
+      -m|--meminfo)
+          meminfowanted="yes"
+          rundefault="no"
+          ;;
+      -d|--diskinfo)
+          diskinfowanted="yes"
+          rundefault="no"
+          ;;
+      -p|--printinfo)
+          printinfowanted="yes"
+          rundefault="no"
+          ;;
+      -s|--softinfo)
+          softinfowanted="yes"
+          rundefault="no"
+          ;;
       *)
-        echo "Oops! I don't recognize '$1'. These are the acceptable options" >&2
         displayhelp >&2
         exit 1
         ;;
