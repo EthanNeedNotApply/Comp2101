@@ -40,7 +40,12 @@ while [ $# -gt 0 ]; do
       -n|--nameinfo)
           nameinfowanted="yes"
           rundefault="no"
+          echo "Your Hostname is:"
           hostname -f
+          echo "Your Domain name:"
+          hostname -d
+          echo ""
+          echo "If blank, Computer is not on Domain"
           ;;
       -i|--ipinfo)
           ipinfowanted="yes"
