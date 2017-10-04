@@ -6,15 +6,16 @@
 function displayhelp {
   cat <<EOF
   Usage: $0 [-h | --help] [output options]
-  Command options can be one or more of the following
-  -n | --nameinfo =
-  -i | --ipinfo =
-  -o | --osinfo =
-  -c | --cpuinfo =
-  -m | --meminfo =
-  -d | --diskinfo =
-  -p | --printinfo =
-  -s | --softinfo = 
+  Command options can be one or more of the following:
+
+  -n | --nameinfo   =  get info about system name and domain name
+  -i | --ipinfo     =  get ip interface information of the current device
+  -o | --osinfo     =  get info about operating system, the OS name and version
+  -c | --cpuinfo    =  get cpu description
+  -m | --meminfo    =  get info about the ammount of memory installed on this device
+  -d | --diskinfo   =  get info on the availible diskspace
+  -p | --printinfo  =  get a list of printers install on the system
+  -s | --softinfo   =  get a list of software installed on this device
 EOF
 }
 
