@@ -59,6 +59,8 @@ while [ $# -gt 0 ]; do
       -c|--cpuinfo)
           cpuinfowanted="yes"
           rundefault="no"
+          echo "CPUs in sytem are:"
+          grep "model" /proc/cpuinfo | sed -e 's/.*://'
           ;;
       -m|--meminfo)
           meminfowanted="yes"
