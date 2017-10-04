@@ -40,6 +40,7 @@ while [ $# -gt 0 ]; do
       -n|--nameinfo)
           nameinfowanted="yes"
           rundefault="no"
+          hostname -f
           ;;
       -i|--ipinfo)
           ipinfowanted="yes"
@@ -48,6 +49,7 @@ while [ $# -gt 0 ]; do
       -o|--osinfo)
           osinfowanted="yes"
           rundefault="no"
+          grep "PRETTY" /etc/os-release | sed -e 's/.*=//'
           ;;
       -c|--cpuinfo)
           cpuinfowanted="yes"
