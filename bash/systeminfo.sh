@@ -65,6 +65,8 @@ while [ $# -gt 0 ]; do
       -m|--meminfo)
           meminfowanted="yes"
           rundefault="no"
+          echo "The amount of installed memory is:"
+          awk '/^MemTotal:/' /proc/meminfo | sed 's/MemTotal:       //'
           ;;
       -d|--diskinfo)
           diskinfowanted="yes"
