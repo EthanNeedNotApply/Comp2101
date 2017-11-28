@@ -71,6 +71,8 @@ while [ $# -gt 0 ]; do
       -d|--diskinfo)
           diskinfowanted="yes"
           rundefault="no"
+          echo "Disk information for main partition is:"
+          df -kBM /
           ;;
       -p|--printinfo)
           printinfowanted="yes"
