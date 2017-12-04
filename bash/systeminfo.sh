@@ -22,13 +22,28 @@ EOF
 function errormessage {
   echo "$@" >&2
 }
+rundefault="yes"
+
+#MY FABULAOUS FUNCTIONS
+
+function nameinfo {
+  echo "Your Hostname is:"
+  hostname -f
+  echo "Your Domain name:"
+  hostname -d
+  echo ""
+  echo "If blank, Computer is not on Domain"
+}
+nameinfowanted="yes"
+rundefault="no"
+
+  #statements
+
 #Process the command line options, saving the results in variables for later use.
 #Gather the data into variables, using arrays where helpful.
 #Create the output using the gathered data and command line options.
 #Display the output.
 #Do any cleanup of temporary files if needed.
-
-rundefault="yes"
 
 while [ $# -gt 0 ]; do
     case "$1" in
@@ -40,12 +55,8 @@ while [ $# -gt 0 ]; do
       -n|--nameinfo)
           nameinfowanted="yes"
           rundefault="no"
-          echo "Your Hostname is:"
-          hostname -f
-          echo "Your Domain name:"
-          hostname -d
-          echo ""
-          echo "If blank, Computer is not on Domain"
+          nameinfo
+          exit 0
           ;;
       -i|--ipinfo)
           ipinfowanted="yes"
