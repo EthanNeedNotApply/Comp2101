@@ -3,41 +3,53 @@
 
 #Declare variables and assign any default values.
 #Define functions for error messages and displaying command line help.
-function displayhelp {
-  cat <<EOF
-  Usage: $0 [-h | --help] [output options]
-  Command options can be one or more of the following:
+  function displayhelp {
+cat <<EOF
+    Usage: $0 [-h | --help] [output options]
+    Command options can be one or more of the following:
 
-  -n | --nameinfo   =  get info about system name and domain name
-  -i | --ipinfo     =  get ip interface information of the current device
-  -o | --osinfo     =  get info about operating system, the OS name and version
-  -c | --cpuinfo    =  get cpu description
-  -m | --meminfo    =  get info about the ammount of memory installed on this device
-  -d | --diskinfo   =  get info on the availible diskspace
-  -p | --printinfo  =  get a list of printers install on the system
-  -s | --softinfo   =  get a list of software installed on this device
+    -n | --nameinfo   =  get info about system name and domain name
+    -i | --ipinfo     =  get ip interface information of the current device
+    -o | --osinfo     =  get info about operating system, the OS name and version
+    -c | --cpuinfo    =  get cpu description
+    -m | --meminfo    =  get info about the ammount of memory installed on this device
+    -d | --diskinfo   =  get info on the availible diskspace
+    -p | --printinfo  =  get a list of printers install on the system
+    -s | --softinfo   =  get a list of software installed on this device
 EOF
-}
+  }
 
-function errormessage {
+  function errormessage {
   echo "$@" >&2
 }
-rundefault="yes"
+  rundefault="yes"
 
 #MY FABULAOUS FUNCTIONS
 
-function nameinfo {
-  echo "Your Hostname is:"
-  hostname -f
-  echo "Your Domain name:"
-  hostname -d
-  echo ""
-  echo "If blank, Computer is not on Domain"
-}
-nameinfowanted="yes"
-rundefault="no"
+#This one is for the nameinfo
 
-  #statements
+    function nameinfo {
+      echo "Your Hostname is:"
+      hostname -f
+      echo "Your Domain name:"
+      hostname -d
+      echo ""
+      echo "If blank, Computer is not on Domain"
+    }
+    nameinfowanted="yes"
+    rundefault="no"
+
+    #This next one is for the ipinfo stuffs
+
+    function ipinfo {
+      echo "Your network interfaces and IP info are listed below"
+      echo ""
+      ip addr
+    }
+      ipinfowanted="yes"
+      rundefault="no"
+
+
 
 #Process the command line options, saving the results in variables for later use.
 #Gather the data into variables, using arrays where helpful.
@@ -61,6 +73,8 @@ while [ $# -gt 0 ]; do
       -i|--ipinfo)
           ipinfowanted="yes"
           rundefault="no"
+          ipinfo
+          exit 0
           ;;
       -o|--osinfo)
           osinfowanted="yes"
