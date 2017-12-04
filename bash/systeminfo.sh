@@ -85,6 +85,8 @@ while [ $# -gt 0 ]; do
       -s|--softinfo)
           softinfowanted="yes"
           rundefault="no"
+          echo "Below is a list of all installed software on this host"
+          apt list --installed | more
           ;;
       *)
         displayhelp >&2
