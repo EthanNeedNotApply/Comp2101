@@ -77,6 +77,10 @@ while [ $# -gt 0 ]; do
       -p|--printinfo)
           printinfowanted="yes"
           rundefault="no"
+          echo "Using lpstat to display connected printers."
+          echo "Connected printers are:"
+          echo ""
+          lpstat -p
           ;;
       -s|--softinfo)
           softinfowanted="yes"
