@@ -46,15 +46,18 @@ EOF
       echo ""
       ip addr
     }
-      ipinfowanted="yes"
-      rundefault="no"
+    ipinfowanted="yes"
+    rundefault="no"
 
     #Up and coming is a cute little function for operating system info (osinfo)
 
     function osinfo {
       echo "Your operating system version is:"
       grep "PRETTY" /etc/os-release | sed -e 's/.*=//'
+
     }
+    osinfowanted="yes"
+    rundefault="no"
 
     #An equally delightful function for cpu info
 
@@ -64,6 +67,14 @@ EOF
     }
       cpuinfowanted="yes"
       rundefault="no"
+
+    #This is a charming function that will help show you the total ammount
+    #physical memory installed in your PC (or the ammount you allocated to your vm)
+    #It's just that friendly :)
+
+    function meminfo {
+      #statements
+    }
 
 
 #Process the command line options, saving the results in variables for later use.
