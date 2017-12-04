@@ -27,7 +27,6 @@ EOF
 #MY FABULAOUS FUNCTIONS
 
 #This one is for the nameinfo
-
     function nameinfo {
       echo "Your Hostname is:"
       hostname -f
@@ -40,7 +39,6 @@ EOF
     rundefault="no"
 
     #This next one is for the ipinfo stuffs
-
     function ipinfo {
       echo "Your network interfaces and IP info are listed below"
       echo ""
@@ -50,17 +48,14 @@ EOF
     rundefault="no"
 
     #Up and coming is a cute little function for operating system info (osinfo)
-
     function osinfo {
       echo "Your operating system version is:"
       grep "PRETTY" /etc/os-release | sed -e 's/.*=//'
-
     }
     osinfowanted="yes"
     rundefault="no"
 
     #An equally delightful function for cpu info
-
     function cpuinfo {
       echo "CPUs in sytem are:"
       grep "model" /proc/cpuinfo | sed -e 's/.*://'
@@ -71,11 +66,20 @@ EOF
     #This is a charming function that will help show you the total ammount
     #physical memory installed in your PC (or the ammount you allocated to your vm)
     #It's just that friendly :)
-
     function meminfo {
-      #statements
+      echo "The amount of installed memory is:"
+      awk '/^MemTotal:/' /proc/meminfo | sed 's/MemTotal:       //'
     }
+      meminfowanted="yes"
+      rundefault="no"
 
+      #Here's annother function, it's equally as pleasant as the last
+      function diskinfo {
+        echo "Disk information for main partition is:"
+        df -kBM /
+      }
+        diskinfowanted="yes"
+        rundefault="no"
 
 #Process the command line options, saving the results in variables for later use.
 #Gather the data into variables, using arrays where helpful.
@@ -117,14 +121,14 @@ while [ $# -gt 0 ]; do
       -m|--meminfo)
           meminfowanted="yes"
           rundefault="no"
-          echo "The amount of installed memory is:"
-          awk '/^MemTotal:/' /proc/meminfo | sed 's/MemTotal:       //'
+          meminfo
+          exit 0
           ;;
       -d|--diskinfo)
           diskinfowanted="yes"
           rundefault="no"
-          echo "Disk information for main partition is:"
-          df -kBM /
+          diskinfo
+          exit 0
           ;;
       -p|--printinfo)
           printinfowanted="yes"
