@@ -34,7 +34,7 @@ EOF
       echo "Your Domain name:"
       hostname -d
       echo ""
-      echo "If blank, Computer is not on Domain"
+      echo "If blank, your computer is not on Domain"
     }
     nameinfowanted="yes"
     rundefault="no"
@@ -49,6 +49,21 @@ EOF
       ipinfowanted="yes"
       rundefault="no"
 
+    #Up and coming is a cute little function for operating system info (osinfo)
+
+    function osinfo {
+      echo "Your operating system version is:"
+      grep "PRETTY" /etc/os-release | sed -e 's/.*=//'
+    }
+
+    #An equally delightful function for cpu info
+
+    function cpuinfo {
+      echo "CPUs in sytem are:"
+      grep "model" /proc/cpuinfo | sed -e 's/.*://'
+    }
+      cpuinfowanted="yes"
+      rundefault="no"
 
 
 #Process the command line options, saving the results in variables for later use.
@@ -79,13 +94,14 @@ while [ $# -gt 0 ]; do
       -o|--osinfo)
           osinfowanted="yes"
           rundefault="no"
-          grep "PRETTY" /etc/os-release | sed -e 's/.*=//'
+          osinfo
+          exit 0
           ;;
       -c|--cpuinfo)
           cpuinfowanted="yes"
           rundefault="no"
-          echo "CPUs in sytem are:"
-          grep "model" /proc/cpuinfo | sed -e 's/.*://'
+          cpuinfo
+          exit 0
           ;;
       -m|--meminfo)
           meminfowanted="yes"
