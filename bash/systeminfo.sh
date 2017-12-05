@@ -97,7 +97,8 @@ EOF
           echo "Below is a list of all installed software on this host"
           apt list --installed | more
         }
-
+        softinfowanted="yes"
+        rundefault="no"
 
 
 #Process the command line options, saving the results in variables for later use.
