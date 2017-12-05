@@ -81,6 +81,25 @@ EOF
         diskinfowanted="yes"
         rundefault="no"
 
+      #This function is a little dainty, but works none-the-less!
+      function printinfo {
+        echo "Using lpstat to display connected printers."
+        echo "Connected printers are:"
+        echo ""
+        lpstat -p
+      }
+        printinfowanted="yes"
+        rundefault="no"
+
+        #Last but certainly not least~ a nice little software function
+        #It will list all of the software and packages that are on your system :)
+        function softinfo {
+          echo "Below is a list of all installed software on this host"
+          apt list --installed | more
+        }
+
+
+
 #Process the command line options, saving the results in variables for later use.
 #Gather the data into variables, using arrays where helpful.
 #Create the output using the gathered data and command line options.
@@ -133,16 +152,14 @@ while [ $# -gt 0 ]; do
       -p|--printinfo)
           printinfowanted="yes"
           rundefault="no"
-          echo "Using lpstat to display connected printers."
-          echo "Connected printers are:"
-          echo ""
-          lpstat -p
+          printinfo
+          exit 0
           ;;
       -s|--softinfo)
           softinfowanted="yes"
           rundefault="no"
-          echo "Below is a list of all installed software on this host"
-          apt list --installed | more
+          softinfo
+          exit 0
           ;;
       *)
         displayhelp >&2
